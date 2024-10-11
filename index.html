@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Self-supervised model for segmenting visual entities and their constituent parts in an open world.">
+  <meta name="keywords" content="Large Multimodal Model, Foundation Model, Visual Grounding, Weakly Supervised Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>groundLMM</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/button_style.css">
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/brands.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Emerging Pixel Grounding in Large Multimodal Models<br>Without Grounding Supervision</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://shengcao-cao.github.io/">Shengcao Cao</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://lgui.web.illinois.edu/">Liang-Yan Gui</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://yxw.web.illinois.edu/">Yu-Xiong Wang</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">University of Illinois Urbana-Champaign</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://groundLMM.github.io"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (Coming soon!)</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://openreview.net/pdf?id=PXNrncg2DF"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>OpenReview</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=Q558YOmF7Zg"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video (YouTube)</span>
+                </a>
+              </span> -->
+              <!-- <span class="link-block">
+                <a href="https://www.bilibili.com/video/BV1Zz421z7Qr"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fa-brands fa-bilibili"></i>
+                  </span>
+                  <span>Video (Bilibili)</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://groundLMM.github.io"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming soon!)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered" style="font-size: 24px; font-weight: bold;">
+          <p>
+            Want to relate <u>text responses</u> with <u>image regions</u> for your LLaVA-like model?<br>
+            Simply check where the model is looking at! No further training needed.
+          </p>
+        </h2>
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+          <source src="./static/images/animation.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Comparison</h2>
+
+        <div class="content has-text-justified">
+          <img src="./static/images/teaser.png" alt="Qualitative comparison" style="max-width: 100%; height: auto;">
+          <p>
+            <strong>Grounded conversations with GLaMM vs. our approach, DiffLMM + Attend-and-Segment.</strong>
+            As a state-of-the-art grounding LMM, GLaMM is trained to relate text phrases with segmentation masks while generating a response.
+            However, due to limitations induced by the grounding supervision, it often fails to precisely follow the human user's instructions
+            (e.g., describing the image <i>in detail</i>, answering the correct <i>color</i>).
+            Our approach reveals and enhances the <i>grounding ability implicitly learned by LMMs without explicit grounding supervision</i>,
+            which leads to visually grounded responses while preserving the general vision-language conversation ability of LMMs.
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+          <img src="./static/images/gcg.png" alt="Quantitative comparison" style="max-width: 100%; height: auto;">
+          <p>
+            <strong>Grounded conversation generation (GCG) results.</strong>
+            Even without grounding supervision, Attend-and-Segment (a&s in the table) unlocks the implicitly learned grounding ability in LLaVA-1.5,
+            <i>outperforming all grounding-specific models on this task</i>.
+            DiffLMM further enhances the grounding ability, and leads to stronger grounding performance.
+            The higher METEOR scores demonstrate our better preserved conversation ability.
+            As a general approach, Attend-and-Segment can be applied on different LMMs (e.g., LLaVA-NeXT and Cambrian-1).
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Approach</h2>
+        
+        <div class="content has-text-justified">
+          <img src="./static/images/attention.png" alt="Attend-and-Segment" style="max-width: 100%; height: auto;">
+          <p>
+            <strong>Meta-architecture of LMMs and the Attend-and-Segment strategy.</strong>
+            When generating a new token (e.g., "cat") which requires grounding, we capture the <i>attention</i> between the new token and the input visual tokens.
+            Then SAM is employed to refine the processed attention map into a <i>segmentation mask</i> (e.g., cat in the image).
+          </p>
+        </div>
+        
+        <div class="content has-text-justified">
+          <img src="./static/images/visual.png" alt="DiffLMM" style="max-width: 100%; height: auto;">
+          <p>
+            <strong>Visual encoding in DiffLMM.</strong>
+            We perform one denoising step with the diffusion model (DM), and extract visual features from an intermediate block of the U-Net.
+            The implicit captioner produces text-like conditioning and improves the visual features in the U-Net.
+            We combine both DM features and CLIP features, and add learnable positional encodings to them.
+            The final visual features are projected into the language feature space, and fed into the LLM along with other text tokens. The DM and CLIP visual encoder are frozen.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="columns is-centered"></div>
+      <div class="column is-full-width">
+        <h2 class="title is-3">More Interesting Examples</h2>
+        
+        <div class="content has-text-justified">
+          <img src="./static/images/qual.png" alt="More examples" style="max-width: 100%; height: auto;">
+          <p>
+            <strong>Comparison of model responses to challenging visual questions.</strong>
+            1) <i>Unusual image contents</i>: The model is requested to analyze the unusual aspect of a given image.
+            2) <i>Adversarial questions</i>: The model is asked about something that does not exist in the image.
+            3) <i>Rare visual concepts</i>: The image contains objects of less frequent categories.
+            4) <i>Shifted image domain</i>: An image from a new domain is given to the model.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{cao2024emerging,
+  title={Emerging Pixel Grounding in Large Multimodal Models Without Grounding Supervision},
+  author={Cao, Shengcao and Gui, Liang-Yan and Wang, Yu-Xiong},
+  journal={arXiv preprint},
+  year={2024}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>,
+            licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
