@@ -55,7 +55,6 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
               <span class="link-block">
                 <a href="https://arxiv.org/abs/2410.08209"
                    class="external-link button is-normal is-rounded is-dark">
@@ -73,6 +72,15 @@
                   </span>
                   <span>Code</span>
                   </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/Shengcao1006/difflmm-llava-v1.5-7b-lora"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-share-square"></i>
+                  </span>
+                  <span>Model</span>
+                </a>
               </span>
             </div>
 
@@ -98,6 +106,39 @@
         </video>
       </div>
     </div>
+</section>
+
+<section class="section" style="background-color:#efeff081">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Current large multimodal models (LMMs) face challenges in grounding,
+            which requires the model to relate language components to visual entities.
+            Contrary to the common practice that fine-tunes LMMs with additional grounding supervision,
+            we find that the grounding ability can in fact emerge in LMMs trained without explicit grounding supervision.
+          </p>
+          <p>
+            To reveal this emerging grounding, we introduce an "attend-and-segment" method
+            which leverages attention maps from standard LMMs to perform pixel-level segmentation.
+            Furthermore, to enhance the grounding ability, we propose DIFFLMM, an LMM utilizing a diffusion-based visual encoder,
+            as opposed to the standard CLIP visual encoder, and trained with the same weak supervision.
+          </p>
+          <p>
+            Without being constrained by the biases and limited scale of grounding-specific supervision data,
+            our approach is more generalizable and scalable.
+            We achieve competitive performance on both grounding-specific and general visual question answering benchmarks,
+            compared with grounding LMMs and generalist LMMs, respectively.
+            Notably, we achieve a 44.2 grounding mask recall on grounded conversation generation without any grounding supervision,
+            outperforming the extensively supervised model GLaMM. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="section">
